@@ -51,7 +51,7 @@ object HazelcastCachingService {
   def apply[F[_]: Applicative: Logger](
       hzConfig: HazelcastConfig,
       mapName: String
-  ): HazelcastCachingService[F] = {
+  ): CachingServiceAlgebra[F] = {
     val clientConfig = getHzcConfiguration(hzConfig)
     configureHzcClient(clientConfig, hzConfig, mapName)
   }

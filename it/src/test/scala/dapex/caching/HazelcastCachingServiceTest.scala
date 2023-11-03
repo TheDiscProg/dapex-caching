@@ -1,19 +1,18 @@
 package dapex.caching
 
 import cats.effect.IO
+import cats.effect.unsafe.implicits.global
 import dapex.caching.config.HazelcastConfig
 import dapex.messaging.Method.SELECT
 import dapex.test.DapexMessageFixture
+import org.scalatest.OptionValues
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
-import org.testcontainers.containers.{GenericContainer, Network}
+import org.testcontainers.containers.GenericContainer
 import org.testcontainers.utility.DockerImageName
 import org.typelevel.log4cats.slf4j.Slf4jLogger
-import cats.effect.unsafe.implicits.global
-import org.scalatest.OptionValues
-import scala.jdk.CollectionConverters._
 
 class HazelcastCachingServiceTest
     extends AnyFlatSpec
@@ -61,14 +60,6 @@ class HazelcastCachingServiceTest
     whenReady(result) { r =>
       r.isDefined shouldBe false
     }
-  }
-
-  it should "return all the keys" in {
-    val result = sut.map.keySet()
-
-    result.size() shouldBe 2
-    val keySet = result.asScala
-    Set("key1", "key2").subsetOf(keySet) shouldBe true
   }
 
   private def setUpHCastContainer(): (HazelcastConfig, GenericContainer[Nothing]) = {
