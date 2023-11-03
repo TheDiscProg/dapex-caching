@@ -19,7 +19,7 @@ Obviously, replace the values above with your values.
 ## Hazelcast Caching Service
 To create a service, use:
 ```scala
-   HazelcastCachingService(hzConfig: HazelcastConfig, mapName: String): HazelcastMap[F]
+   CachingService(hzConfig: HazelcastConfig, mapName: String): CachingServiceAlgebra[F]
 ```
 This will create a map in Hazelcast cluster with the correct name and TTL, if one does not already exist.
 

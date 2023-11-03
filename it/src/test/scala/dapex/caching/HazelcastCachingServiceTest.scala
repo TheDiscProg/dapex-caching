@@ -32,7 +32,7 @@ class HazelcastCachingServiceTest
   private val config = hazelcastT._1
   private val container = hazelcastT._2
 
-  val sut = HazelcastCachingService[IO](config, "test-map")
+  val sut = CachingService[IO](config, "test-map")
   val message = getMessage(SELECT)
 
   it should "run Hazelcast container" in {
