@@ -1,11 +1,11 @@
-package dapex.caching
+package simex.caching
 
 import cats.Applicative
 import com.hazelcast.client.HazelcastClient
 import com.hazelcast.client.config.ClientConfig
 import com.hazelcast.map.IMap
-import dapex.caching.config.HazelcastConfig
 import org.typelevel.log4cats.Logger
+import simex.caching.config.HazelcastConfig
 
 object CachingService {
 

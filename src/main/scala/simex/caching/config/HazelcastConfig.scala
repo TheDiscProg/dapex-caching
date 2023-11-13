@@ -1,4 +1,4 @@
-package dapex.caching.config
+package simex.caching.config
 
 import io.circe.Decoder
 import io.circe.generic.semiauto.deriveDecoder

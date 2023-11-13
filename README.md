@@ -1,4 +1,4 @@
-# DAPEX Chaching Service
+# SIMEX Chaching Service
 
 ## Overview
 This library provides a caching service that can be used throughout the project. The caching service uses Hazelcast.

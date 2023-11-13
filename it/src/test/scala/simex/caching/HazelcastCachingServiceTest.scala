@@ -1,10 +1,7 @@
-package dapex.caching
+package simex.caching
 
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
-import dapex.caching.config.HazelcastConfig
-import dapex.messaging.Method.SELECT
-import dapex.test.DapexMessageFixture
 import org.scalatest.OptionValues
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.flatspec.AnyFlatSpec
@@ -13,12 +10,14 @@ import org.scalatest.time.{Millis, Seconds, Span}
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.utility.DockerImageName
 import org.typelevel.log4cats.slf4j.Slf4jLogger
+import simex.caching.config.HazelcastConfig
+import simex.test.SimexTestFixture
 
 class HazelcastCachingServiceTest
     extends AnyFlatSpec
     with Matchers
     with ScalaFutures
-    with DapexMessageFixture
+    with SimexTestFixture
     with OptionValues {
 
   implicit val defaultPatience =
@@ -33,7 +32,7 @@ class HazelcastCachingServiceTest
   private val container = hazelcastT._2
 
   val sut = CachingService[IO](config, "test-map")
-  val message = getMessage(SELECT)
+  val message = authenticationRequest
 
   it should "run Hazelcast container" in {
     val result = container.isRunning

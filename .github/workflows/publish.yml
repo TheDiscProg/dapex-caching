@@ -1,4 +1,4 @@
-name: Publish DAPEX Caching
+name: Publish Simex Caching
 on:
   push:
     branches:

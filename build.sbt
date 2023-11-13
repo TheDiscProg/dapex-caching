@@ -1,13 +1,13 @@
-ThisBuild / organization := "DAPEX"
+ThisBuild / organization := "simex"
 
-ThisBuild / version := "0.1.3"
+ThisBuild / version := "0.6.0" // Keep this in sync with simex-messaging
 
 lazy val commonSettings = Seq(
   scalaVersion := "2.13.10",
   libraryDependencies ++= Dependencies.all,
   resolvers += Resolver.githubPackages("TheDiscProg"),
   githubOwner := "TheDiscProg",
-  githubRepository := "dapex-caching",
+  githubRepository := "simex-caching",
   addCompilerPlugin(
     ("org.typelevel" %% "kind-projector" % "0.13.2").cross(CrossVersion.full)
   ),
@@ -20,7 +20,7 @@ lazy val root = project.in(file("."))
   )
   .settings(
     commonSettings,
-    name := "dapex-caching",
+    name := "simex-caching",
     scalacOptions ++= Scalac.options
   )
 
@@ -28,7 +28,7 @@ lazy val integrationTest = (project in file ("it"))
   .enablePlugins(ScalafmtPlugin)
   .settings(
     commonSettings,
-    name := "dapex-kafka-integration-test",
+    name := "simex-caching-integration-test",
     publish / skip := true,
     libraryDependencies ++= Dependencies.it,
     parallelExecution := false
