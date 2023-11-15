@@ -23,11 +23,10 @@ case class HazelcastCachingService[F[_]: Applicative: Logger](
 
   override def getMessage(key: String): F[Option[Simex]] =
     Logger[F].info(s"Hzcast Getting by token: $key") *>
-      getSimexMessageFromCache(key, map)
+      getSimexMessageFromCache(key)
 
   private def getSimexMessageFromCache(
-      key: String,
-      map: IMap[String, String]
+      key: String
   ): F[Option[Simex]] =
     if (map.containsKey(key)) {
       val jsonStr = map.get(key)
@@ -40,5 +39,15 @@ case class HazelcastCachingService[F[_]: Applicative: Logger](
     } else {
       Logger[F].warn(s"Hzcast Key [$key] not found in map: ${map.getName}") *>
         (None: Option[Simex]).pure[F]
+    }
+
+  override def deleteMessage(key: String): F[Unit] =
+    if (map.containsKey(key)) {
+      for {
+        _ <- Logger[F].info(s"Hzcast Deleting by token: $key")
+        _ = map.delete(key)
+      } yield ()
+    } else {
+      ().pure[F]
     }
 }

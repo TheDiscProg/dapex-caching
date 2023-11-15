@@ -8,4 +8,6 @@ trait CachingServiceAlgebra[F[_]] {
 
   def getMessage(key: String): F[Option[Simex]]
 
+  def deleteMessage(key: String): F[Unit]
+
 }

@@ -61,6 +61,27 @@ class HazelcastCachingServiceTest
     }
   }
 
+  it should "delete by key" in {
+    val result = (for {
+      _ <- sut.deleteMessage("key2")
+      message <- sut.getMessage("key2")
+    } yield message).unsafeToFuture()
+
+    whenReady(result) { r =>
+      r.isDefined shouldBe false
+    }
+  }
+
+  it should "handle delete message when key does not exist" in {
+    val result = (for {
+      r <- sut.deleteMessage("anotherkey")
+    } yield r).unsafeToFuture()
+
+    whenReady(result) { r =>
+      r shouldBe ()
+    }
+  }
+
   private def setUpHCastContainer(): (HazelcastConfig, GenericContainer[Nothing]) = {
     val container: GenericContainer[Nothing] = new GenericContainer(
       DockerImageName.parse(HazelcastImage)
