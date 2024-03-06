@@ -11,7 +11,9 @@ import org.testcontainers.containers.GenericContainer
 import org.testcontainers.utility.DockerImageName
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 import simex.caching.config.HazelcastConfig
+import simex.messaging.Datum
 import simex.test.SimexTestFixture
+import thediscprog.slogic.Xor
 
 class HazelcastCachingServiceTest
     extends AnyFlatSpec
@@ -32,7 +34,30 @@ class HazelcastCachingServiceTest
   private val container = hazelcastT._2
 
   val sut = CachingService[IO](config, "test-map")
-  val message = authenticationRequest
+  val message = authenticationRequest.copy(
+    data = authenticationRequest.data ++ Vector(
+      Datum(
+        "person",
+        None,
+        Xor.applyRight(
+          Vector(
+            Datum("name", None, Xor.applyLeft("John Smith")),
+            Datum("title", None, Xor.applyLeft("Mr")),
+            Datum(
+              "address",
+              None,
+              Xor.applyRight(
+                Vector(
+                  Datum("street", None, Xor.applyLeft("The Street")),
+                  Datum("postcode", None, Xor.applyLeft("AA1 1AA"))
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
 
   it should "run Hazelcast container" in {
     val result = container.isRunning
