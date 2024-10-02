@@ -13,7 +13,8 @@ import org.typelevel.log4cats.slf4j.Slf4jLogger
 import simex.caching.config.HazelcastConfig
 import simex.messaging.Datum
 import simex.test.SimexTestFixture
-import thediscprog.slogic.Xor
+import io.github.thediscprog.slogic.Xor
+import org.typelevel.log4cats.SelfAwareStructuredLogger
 
 class HazelcastCachingServiceTest
     extends AnyFlatSpec
@@ -22,10 +23,10 @@ class HazelcastCachingServiceTest
     with SimexTestFixture
     with OptionValues {
 
-  implicit val defaultPatience =
+  implicit val defaultPatience: PatienceConfig =
     PatienceConfig(timeout = Span(30, Seconds), interval = Span(100, Millis))
 
-  private implicit def unsafeLogger = Slf4jLogger.getLogger[IO]
+  private implicit def unsafeLogger: SelfAwareStructuredLogger[IO] = Slf4jLogger.getLogger[IO]
   private val HazelcastImage = "hazelcast/hazelcast:latest"
   private val clusterName = "test-cluster"
 

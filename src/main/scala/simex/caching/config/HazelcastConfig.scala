@@ -14,6 +14,7 @@ case class HazelcastConfig(
 )
 
 object HazelcastConfig {
-  implicit val hint = ProductHint[HazelcastConfig](ConfigFieldMapping(CamelCase, CamelCase))
+  implicit val hint: ProductHint[HazelcastConfig] =
+    ProductHint[HazelcastConfig](ConfigFieldMapping(CamelCase, CamelCase))
   implicit val hzcConfigurationDecoder: Decoder[HazelcastConfig] = deriveDecoder
 }
