@@ -6,12 +6,11 @@ lazy val supportedScalaVersions = List(scala2, scala3)
 
 ThisBuild / organization := "simex"
 
-ThisBuild / version := "0.8.0" // Keep this in sync with simex-messaging
+ThisBuild / version := "0.9.0"
 
 lazy val commonSettings = Seq(
   scalaVersion := scala3,
   libraryDependencies ++= Dependencies.all,
-  //resolvers += Resolver.githubPackages("TheDiscProg"),
   githubOwner := "TheDiscProg",
   githubRepository := "simex-caching"
 )
@@ -53,6 +52,7 @@ lazy val integrationTest = (project in file ("it"))
 
 githubTokenSource := TokenSource.Environment("GITHUB_TOKEN")
 
+// The tests in the following will be in the scalaVersion setting
 addCommandAlias("formatAll", ";scalafmt;test:scalafmt;integrationTest/test:scalafmt;")
 addCommandAlias("cleanAll", ";clean;integrationTest:clean")
 addCommandAlias("itTest", ";integrationTest/test:test")

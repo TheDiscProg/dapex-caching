@@ -2,6 +2,8 @@ package simex.caching
 
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
+import io.github.thediscprog.simexmessaging.messaging.Datum
+import io.github.thediscprog.simexmessaging.test.SimexTestFixture
 import org.scalatest.OptionValues
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.flatspec.AnyFlatSpec
@@ -11,8 +13,6 @@ import org.testcontainers.containers.GenericContainer
 import org.testcontainers.utility.DockerImageName
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 import simex.caching.config.HazelcastConfig
-import simex.messaging.Datum
-import simex.test.SimexTestFixture
 import io.github.thediscprog.slogic.Xor
 import org.typelevel.log4cats.SelfAwareStructuredLogger
 

@@ -5,8 +5,8 @@ import cats.syntax.all._
 import com.hazelcast.map.IMap
 import io.circe.parser._
 import io.circe.syntax._
+import io.github.thediscprog.simexmessaging.messaging.Simex
 import org.typelevel.log4cats.Logger
-import simex.messaging.Simex
 
 import java.util.concurrent.TimeUnit
 
