@@ -1,11 +1,11 @@
-package simex.caching
+package io.github.thediscprog.simexcaching
 
 import cats.Applicative
 import com.hazelcast.client.HazelcastClient
 import com.hazelcast.client.config.ClientConfig
 import com.hazelcast.map.IMap
+import io.github.thediscprog.simexcaching.config.HazelcastConfig
 import org.typelevel.log4cats.Logger
-import simex.caching.config.HazelcastConfig
 
 object CachingService {
 

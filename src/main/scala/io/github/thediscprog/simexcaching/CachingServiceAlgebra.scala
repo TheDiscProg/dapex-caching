@@ -1,4 +1,4 @@
-package simex.caching
+package io.github.thediscprog.simexcaching
 
 import io.github.thediscprog.simexmessaging.messaging.Simex
 
