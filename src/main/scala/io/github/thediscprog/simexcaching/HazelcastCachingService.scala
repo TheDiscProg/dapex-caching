@@ -1,4 +1,4 @@
-package simex.caching
+package io.github.thediscprog.simexcaching
 
 import cats.Applicative
 import cats.syntax.all._
