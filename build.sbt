@@ -2,7 +2,7 @@ import sbt.librarymanagement.CrossVersion
 import sbt.url
 import xerial.sbt.Sonatype.{GitHubHosting, sonatypeCentralHost}
 
-lazy val scala2 = "2.13.14"
+lazy val scala2 = "2.13.15"
 lazy val scala3 = "3.5.1"
 lazy val supportedScalaVersions = List(scala2, scala3)
 
@@ -25,11 +25,7 @@ lazy val root = project.in(file("."))
         case _ => Seq("-Yretain-trees")
       }
     },
-    crossScalaVersions := supportedScalaVersions,
-    // Scala 2 libraries to use for Scala 3
-    libraryDependencies ++= Seq(
-      ("com.github.pureconfig" %% "pureconfig" % "0.17.7").cross(CrossVersion.for3Use2_13)
-    )
+    crossScalaVersions := supportedScalaVersions
   )
 
 lazy val integrationTest = (project in file ("it"))
@@ -46,7 +42,7 @@ lazy val integrationTest = (project in file ("it"))
   .dependsOn(root % "test->test; compile->compile")
   .aggregate(root)
 
-ThisBuild / version := "0.10.0"
+ThisBuild / version := "0.10.1"
 ThisBuild / organization := "io.github.thediscprog"
 ThisBuild / organizationName := "thediscprog"
 ThisBuild / organizationHomepage := Some(url("https://github.com/TheDiscProg"))
